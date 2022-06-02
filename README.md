@@ -17,4 +17,11 @@
 3. Космопорт «Черезтерновый Кзвёздный»
 4. Дизайн-студия имени Слишком Известного Персонажа
 
-```.selector {font-family: "Awesome", Arial, sans-serif; color: red;}
+Ниже пример кода из нашего приложения:
+
+```css
+.selector {
+  font-family: "Awesome", Arial, sans-serif;
+  color: red;
+}
+```
