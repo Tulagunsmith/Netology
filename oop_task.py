@@ -21,8 +21,8 @@ class Student:
         student_data = (f'Имя: {self.name}\n'
                         f'Фамилия: {self.surname}\n'
                         f'Средняя оценка за домашние задания: {avarage_grade(self.grades)}\n'
-                        f'Курсы в процессе изучения: {self.courses_in_progress}\n'
-                        f'Завершенные курсы: {self.finished_courses}')
+                        f'Курсы в процессе изучения: {" ".join(x for x in self.courses_in_progress)}\n'
+                        f'Завершенные курсы: {" ".join(x for x in self.finished_courses)}')
         return student_data
 
     def __lt__(self, other):
@@ -78,46 +78,72 @@ def avarage_grade(grades_dict):
         for grade in grades:
             total += grade
             count += 1
-    res = total / count
+    res = round(total / count, 1)
     return res
 
 
 chris_student = Student('Christopher', 'Morris', 'male')
 chris_student.courses_in_progress += ['Python']
 chris_student.courses_in_progress += ['C#']
+chris_student.finished_courses += ['Введение в программирование']
 leela_student = Student('Leela', 'Turanga', 'female')
 leela_student.courses_in_progress += ['Python']
 leela_student.courses_in_progress += ['JS']
+leela_student.finished_courses += ['Введение в программирование']
 
 collin_reviewer = Reviewer('Collin', 'Robinson')
 collin_reviewer.courses_attached += ['Python']
+collin_reviewer.courses_attached += ['JS']
 bender_reviewer = Reviewer('Bender', 'Rodrigez')
 bender_reviewer.courses_attached += ['Python']
+bender_reviewer.courses_attached += ['C#']
 
 ellen_lecturer = Lecturer('Ellen', 'Ripley')
 ellen_lecturer.courses_attached += ['Python']
+ellen_lecturer.courses_attached += ['C#']
+ellen_lecturer.courses_attached += ['JS']
 doc_lecturer = Lecturer('Doctor', 'Lector')
 doc_lecturer.courses_attached += ['C#']
+doc_lecturer.courses_attached += ['Python']
+doc_lecturer.courses_attached += ['JS']
 
 collin_reviewer.rate_hw(chris_student, 'Python', 10)
+collin_reviewer.rate_hw(leela_student, 'JS', 8)
+collin_reviewer.rate_hw(leela_student, 'JS', 7)
+collin_reviewer.rate_hw(leela_student, 'Python', 8)
+bender_reviewer.rate_hw(leela_student, 'Python', 6)
+bender_reviewer.rate_hw(chris_student, 'C#', 7)
+bender_reviewer.rate_hw(chris_student, 'C#', 6)
+bender_reviewer.rate_hw(chris_student, 'Python', 8)
 
 chris_student.rate_lecturer(ellen_lecturer, 'Python', 8)
-chris_student.rate_lecturer(ellen_lecturer, 'Python', 10)
 chris_student.rate_lecturer(doc_lecturer, 'C#', 10)
 chris_student.rate_lecturer(doc_lecturer, 'C#', 10)
+leela_student.rate_lecturer(doc_lecturer, 'Python', 10)
+leela_student.rate_lecturer(ellen_lecturer, 'JS', 8)
+leela_student.rate_lecturer(ellen_lecturer, 'JS', 7)
 
 print(chris_student.grades)
+print()
+print(leela_student.grades)
 print()
 print(ellen_lecturer.grades)
 print()
 print(doc_lecturer.grades)
 print()
+print(chris_student)
+print()
+print(leela_student)
+print()
 print(collin_reviewer)
+print()
+print(bender_reviewer)
 print()
 print(ellen_lecturer)
 print()
 print(doc_lecturer)
 print()
-print(chris_student)
-print()
 print(ellen_lecturer < doc_lecturer)
+print(ellen_lecturer > doc_lecturer)
+print(chris_student > leela_student)
+print(chris_student < leela_student)
