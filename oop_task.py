@@ -34,6 +34,10 @@ class Lecturer(Mentor):
         super().__init__(name, surname)
         self.grades = {}
 
+    def __str__(self):
+        student_data = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {avarage_grade(self.grades)}'
+        return student_data
+
 
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade):
@@ -45,6 +49,16 @@ class Reviewer(Mentor):
         else:
             return 'Ошибка'
 
+
+def avarage_grade(grades_dict):
+    total = 0
+    count = 0
+    for grades in grades_dict.values():
+        for grade in grades:
+            total += grade
+            count += 1
+    res = total / count
+    return res
 
 test_student = Student('Ruoy', 'Eman', 'your_gender')
 test_student.courses_in_progress += ['Python']
@@ -62,3 +76,4 @@ test_student.rate_lecturer(test_lecturer, 'Python', 8)
 print(test_student.grades)
 print(test_lecturer.grades)
 print(test_student)
+print(test_lecturer)
