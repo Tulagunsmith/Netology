@@ -17,7 +17,13 @@ class Student:
         else:
             return 'Ошибка'
 
-
+    def __str__(self):
+        student_data = (f'Имя: {self.name}\n'
+                        f'Фамилия: {self.surname}\n'
+                        f'Средняя оценка за домашние задания: {avarage_grade(self.grades)}\n'
+                        f'Курсы в процессе изучения: {self.courses_in_progress}\n'
+                        f'Завершенные курсы: {self.finished_courses}')
+        return student_data
 
 
 class Mentor:
@@ -33,8 +39,8 @@ class Lecturer(Mentor):
         self.grades = {}
 
     def __str__(self):
-        student_data = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {avarage_grade(self.grades)}'
-        return student_data
+        lecturer_data = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {avarage_grade(self.grades)}'
+        return lecturer_data
 
 
 class Reviewer(Mentor):
@@ -76,6 +82,11 @@ test_reviewer.rate_hw(test_student, 'Python', 10)
 test_student.rate_lecturer(test_lecturer, 'Python', 8)
 
 print(test_student.grades)
+print()
 print(test_lecturer.grades)
+print()
 print(test_reviewer)
+print()
 print(test_lecturer)
+print()
+print(test_student)
