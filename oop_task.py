@@ -42,6 +42,13 @@ class Lecturer(Mentor):
         lecturer_data = f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {avarage_grade(self.grades)}'
         return lecturer_data
 
+    def __lt__(self, other):
+        if not isinstance(other, Lecturer):
+            print('Некорректное сравнение!')
+            return
+        return avarage_grade(self.grades) < avarage_grade(other.grades)
+
+
 
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade):
@@ -68,25 +75,38 @@ def avarage_grade(grades_dict):
     res = total / count
     return res
 
+
 test_student = Student('Ruoy', 'Eman', 'your_gender')
 test_student.courses_in_progress += ['Python']
+test_student.courses_in_progress += ['C#']
 
 test_reviewer = Reviewer('Some', 'Buddy')
 test_reviewer.courses_attached += ['Python']
 
 test_lecturer = Lecturer('John', 'Smith')
 test_lecturer.courses_attached += ['Python']
+test_lecturer_2 = Lecturer('Doctor', 'Lector')
+test_lecturer_2.courses_attached += ['C#']
 
 test_reviewer.rate_hw(test_student, 'Python', 10)
 
 test_student.rate_lecturer(test_lecturer, 'Python', 8)
+test_student.rate_lecturer(test_lecturer, 'Python', 10)
+test_student.rate_lecturer(test_lecturer_2, 'C#', 10)
+test_student.rate_lecturer(test_lecturer_2, 'C#', 10)
 
 print(test_student.grades)
 print()
 print(test_lecturer.grades)
 print()
+print(test_lecturer_2.grades)
+print()
 print(test_reviewer)
 print()
 print(test_lecturer)
 print()
+print(test_lecturer_2)
+print()
 print(test_student)
+print()
+print(test_lecturer < test_lecturer_2)
