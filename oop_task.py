@@ -17,9 +17,7 @@ class Student:
         else:
             return 'Ошибка'
 
-    def __str__(self):
-        student_data = f'Имя: {self.name}\nФамилия: {self.surname}'
-        return student_data
+
 
 
 class Mentor:
@@ -49,6 +47,10 @@ class Reviewer(Mentor):
         else:
             return 'Ошибка'
 
+    def __str__(self):
+        reviewer_data = f'Имя: {self.name}\nФамилия: {self.surname}'
+        return reviewer_data
+
 
 def avarage_grade(grades_dict):
     total = 0
@@ -75,5 +77,5 @@ test_student.rate_lecturer(test_lecturer, 'Python', 8)
 
 print(test_student.grades)
 print(test_lecturer.grades)
-print(test_student)
+print(test_reviewer)
 print(test_lecturer)
