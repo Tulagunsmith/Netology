@@ -25,6 +25,12 @@ class Student:
                         f'Завершенные курсы: {self.finished_courses}')
         return student_data
 
+    def __lt__(self, other):
+        if not isinstance(other, Student):
+            print('Некорректное сравнение!')
+            return
+        return avarage_grade(self.grades) < avarage_grade(other.grades)
+
 
 class Mentor:
     def __init__(self, name, surname):
@@ -76,37 +82,42 @@ def avarage_grade(grades_dict):
     return res
 
 
-test_student = Student('Ruoy', 'Eman', 'your_gender')
-test_student.courses_in_progress += ['Python']
-test_student.courses_in_progress += ['C#']
+chris_student = Student('Christopher', 'Morris', 'male')
+chris_student.courses_in_progress += ['Python']
+chris_student.courses_in_progress += ['C#']
+leela_student = Student('Leela', 'Turanga', 'female')
+leela_student.courses_in_progress += ['Python']
+leela_student.courses_in_progress += ['JS']
 
-test_reviewer = Reviewer('Some', 'Buddy')
-test_reviewer.courses_attached += ['Python']
+collin_reviewer = Reviewer('Collin', 'Robinson')
+collin_reviewer.courses_attached += ['Python']
+bender_reviewer = Reviewer('Bender', 'Rodrigez')
+bender_reviewer.courses_attached += ['Python']
 
-test_lecturer = Lecturer('John', 'Smith')
-test_lecturer.courses_attached += ['Python']
-test_lecturer_2 = Lecturer('Doctor', 'Lector')
-test_lecturer_2.courses_attached += ['C#']
+ellen_lecturer = Lecturer('Ellen', 'Ripley')
+ellen_lecturer.courses_attached += ['Python']
+doc_lecturer = Lecturer('Doctor', 'Lector')
+doc_lecturer.courses_attached += ['C#']
 
-test_reviewer.rate_hw(test_student, 'Python', 10)
+collin_reviewer.rate_hw(chris_student, 'Python', 10)
 
-test_student.rate_lecturer(test_lecturer, 'Python', 8)
-test_student.rate_lecturer(test_lecturer, 'Python', 10)
-test_student.rate_lecturer(test_lecturer_2, 'C#', 10)
-test_student.rate_lecturer(test_lecturer_2, 'C#', 10)
+chris_student.rate_lecturer(ellen_lecturer, 'Python', 8)
+chris_student.rate_lecturer(ellen_lecturer, 'Python', 10)
+chris_student.rate_lecturer(doc_lecturer, 'C#', 10)
+chris_student.rate_lecturer(doc_lecturer, 'C#', 10)
 
-print(test_student.grades)
+print(chris_student.grades)
 print()
-print(test_lecturer.grades)
+print(ellen_lecturer.grades)
 print()
-print(test_lecturer_2.grades)
+print(doc_lecturer.grades)
 print()
-print(test_reviewer)
+print(collin_reviewer)
 print()
-print(test_lecturer)
+print(ellen_lecturer)
 print()
-print(test_lecturer_2)
+print(doc_lecturer)
 print()
-print(test_student)
+print(chris_student)
 print()
-print(test_lecturer < test_lecturer_2)
+print(ellen_lecturer < doc_lecturer)
