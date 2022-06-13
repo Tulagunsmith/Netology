@@ -17,6 +17,10 @@ class Student:
         else:
             return 'Ошибка'
 
+    def __str__(self):
+        student_data = f'Имя: {self.name}\nФамилия: {self.surname}'
+        return student_data
+
 
 class Mentor:
     def __init__(self, name, surname):
@@ -57,3 +61,4 @@ test_student.rate_lecturer(test_lecturer, 'Python', 8)
 
 print(test_student.grades)
 print(test_lecturer.grades)
+print(test_student)
