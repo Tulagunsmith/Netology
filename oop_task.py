@@ -55,7 +55,6 @@ class Lecturer(Mentor):
         return avarage_grade(self.grades) < avarage_grade(other.grades)
 
 
-
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade):
         if isinstance(student, Student) and course in self.courses_attached and course in student.courses_in_progress:
@@ -117,11 +116,30 @@ bender_reviewer.rate_hw(chris_student, 'C#', 6)
 bender_reviewer.rate_hw(chris_student, 'Python', 8)
 
 chris_student.rate_lecturer(ellen_lecturer, 'Python', 8)
+chris_student.rate_lecturer(doc_lecturer, 'Python', 10)
 chris_student.rate_lecturer(doc_lecturer, 'C#', 10)
 chris_student.rate_lecturer(doc_lecturer, 'C#', 10)
 leela_student.rate_lecturer(doc_lecturer, 'Python', 10)
+leela_student.rate_lecturer(ellen_lecturer, 'Python', 7)
 leela_student.rate_lecturer(ellen_lecturer, 'JS', 8)
 leela_student.rate_lecturer(ellen_lecturer, 'JS', 7)
+
+
+students = [chris_student, leela_student]
+lecturers = [ellen_lecturer, doc_lecturer]
+
+
+def avarage_course_grade(apprentices, course):
+    count = 0
+    common = 0
+    for apprentice in apprentices:
+        for keys, values in apprentice.grades.items():
+            if course in keys:
+                count += sum(values)
+                common += len(values)
+    total = round(count / common, 1)
+    return total
+
 
 print(chris_student.grades)
 print()
@@ -147,3 +165,6 @@ print(ellen_lecturer < doc_lecturer)
 print(ellen_lecturer > doc_lecturer)
 print(chris_student > leela_student)
 print(chris_student < leela_student)
+
+print(avarage_course_grade(students, 'Python'))
+print(avarage_course_grade(lecturers, 'Python'))
